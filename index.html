@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BobBTC Insight</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+    .card {
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    h1 {
+      color: orange;
+    }
+    .price {
+      font-size: 32px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>BobBTC Insight</h1>
+  <p>Bitcoin L1 Dashboard built with BOB</p>
+
+  <div class="card">
+    <h2>BTC Price (USD)</h2>
+    <div class="price" id="btcPrice">Loading...</div>
+  </div>
+
+  <script>
+    async function fetchBTC() {
+      try {
+        const response = await fetch("https://api.coindesk.com/v1/bpi/currentprice/BTC.json");
+        const data = await response.json();
+        const price = data.bpi.USD.rate;
+        document.getElementById("btcPrice").innerText = "$" + price;
+      } catch (error) {
+        document.getElementById("btcPrice").innerText = "Error loading data";
+      }
+    }
+
+    fetchBTC();
+    setInterval(fetchBTC, 60000);
+  </script>
+
+</body>
+</html>
