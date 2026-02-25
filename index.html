@@ -3,6 +3,7 @@
 <head>
   <title>BobBTC Insight</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -42,11 +43,32 @@
       font-size: 14px;
       color: #888;
     }
-canvas {
-  max-width: 100%;
-  width: 100% !important;
-  height: 400px !important;
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 40px;
 }
+
+.chart-container {
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Mobile Mode */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  canvas {
+    height: 280px !important;
+  }
+}
+
 
   </style>
 </head>
@@ -55,6 +77,7 @@ canvas {
   <h1>BobBTC Insight</h1>
   <div class="subtitle">Bitcoin L1 Dashboard built with BOB</div>
 
+<div class="dashboard">
   <div class="card">
     <div class="metric">
       <div>BTC Price (USD)</div>
@@ -73,8 +96,9 @@ canvas {
 
     <div class="updated" id="lastUpdated"></div>
   </div>
-<div style="margin-top:40px; max-width:900px; margin-left:auto; margin-right:auto;">
-  <canvas id="btcChart"></canvas>
+<div class="chart-container">
+    <canvas id="btcChart"></canvas>
+  </div>
 </div>
 
 <script>
