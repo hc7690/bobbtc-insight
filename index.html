@@ -78,6 +78,7 @@ canvas {
 </div>
 
 <script>
+let btcChartInstance;
 async function fetchBTC() {
   try {
     const response = await fetch(
@@ -123,7 +124,11 @@ async function loadChart() {
 
   const ctx = document.getElementById("btcChart").getContext("2d");
 
-  new Chart(ctx, {
+  if (btcChartInstance) {
+  btcChartInstance.destroy();
+}
+
+btcChartInstance = new Chart(ctx, {
     type: "line",
     data: {
       labels: labels,
@@ -152,6 +157,7 @@ async function loadChart() {
 fetchBTC();
 loadChart();
 setInterval(fetchBTC, 60000);
+setInterval(loadChart, 60000);
 </script>
 
 </body>
